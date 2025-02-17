@@ -1,0 +1,8 @@
+[window]
+  title = "Alacritty"
+  dynamic_title = false
+[font]
+  normal = { family = "MesloLGS NF", style = "Regular"}
+  size = 10
+[terminal]
+  shell = "pwsh"
