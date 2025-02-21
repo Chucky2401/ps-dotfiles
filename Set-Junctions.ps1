@@ -11,3 +11,7 @@ If (-not (Test-Path "$env:LOCALAPPDATA\nvim")) {
 If (-not (Test-Path "$env:APPDATA\yazi")) {
   New-Item -Path "$($env:APPDATA)\yazi" -ItemType Junction -Value "$scriptRoot\yazi"
 }
+
+If (-not (Test-Path "$env:LOCALAPPDATA\Programs\oh-my-posh\themes")) {
+  New-Item -Path "$env:LOCALAPPDATA\Programs\oh-my-posh\themes" -ItemType Junction -Value "$scriptRoot\oh-my-posh\themes"
+}

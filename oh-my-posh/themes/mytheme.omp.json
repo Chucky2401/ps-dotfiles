@@ -1,0 +1,152 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "secondary_prompt": {
+    "template": "❱❱ ",
+    "foreground": "green",
+    "background": "transparent"
+  },
+  "transient_prompt": {
+    "template": "❱ ",
+    "foreground": "green",
+    "background": "transparent"
+  },
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "properties": {
+            "template": "\ue70f"
+          },
+          "style": "powerline",
+          "foreground": "cyan",
+          "type": "os"
+        },
+        {
+          "properties": {
+            "style": "full"
+          },
+          "style": "plain",
+          "trailing_diamond": ":",
+          "template": " {{ if .SSHSession }}\uf817 {{ end }}TBW@{{ .HostName }} \ue0b1",
+          "foreground": "#16C60C",
+          "background": "transparent",
+          "type": "session"
+        },
+        {
+          "properties": {
+            "folder_icon": "\uf115 ",
+            "folder_separator_icon": "\\",
+            "home_icon": "\uf7db ",
+            "mapped_locations": {
+              "C:/Users/tbrejon/Git/PowerShell/": "\uf09b PowerShell"
+            },
+            "max_depth": 3,
+            "style": "agnoster_short"
+          },
+          "style": "powerline",
+          "template": " {{ .Path }} $",
+          "foreground": "#3B78FF",
+          "background": "transparent",
+          "type": "path"
+        },
+        {
+          "properties": {
+            "fetch_status": true,
+            "fetch_upstream_icon": true
+          },
+          "style": "powerline",
+          "template": " {{ .UpstreamIcon }}{{ .HEAD }} {{ .BranchStatus }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} | {{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0}} \uf0c7 {{ .StashCount }}{{ end }}{{ if gt .WorktreeCount 0}} \uf1bb {{ .WorktreeCount }}{{ end }} ",
+          "foreground": "#193549",
+          "powerline_symbol": "\ue0b0",
+          "background": "#95ffa4",
+          "type": "git",
+          "background_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}#FFEB3B{{ end }}",
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#FFCC80{{ end }}",
+            "{{ if gt .Ahead 0 }}#B388FF{{ end }}",
+            "{{ if gt .Behind 0 }}#B388FB{{ end }}"
+          ]
+        }
+      ],
+      "newline": true
+    },
+    {
+      "type": "prompt",
+      "alignment": "right",
+      "filler": "<#ffffff,transparent>·</>",
+      "segments": [
+        {
+          "properties": {
+            "always_enabled": true,
+            "status_template": "{{ if eq .Code 0 }} \uf00c {{ else }} \uf00d {{ .Code }} {{ end }}"
+          },
+          "style": "powerline",
+          "template": "{{ .String }}",
+          "foreground": "#ffffff",
+          "powerline_symbol": "\ue0b0",
+          "background": "#585858",
+          "type": "status",
+          "foreground_templates": [
+            "{{ if .Error }}#d30e0e{{ end }}"
+          ]
+        },
+        {
+          "properties": {
+            "always_enabled": true
+          },
+          "style": "powerline",
+          "template": " {{ .FormattedMs }} ",
+          "foreground": "#ffffff",
+          "powerline_symbol": "\ue0b0",
+          "background": "#83769c",
+          "type": "executiontime",
+          "min_width": 96
+        },
+        {
+          "properties": {
+            "mapped_shell_names": {
+              "powershell": "\ue683",
+              "pwsh": " \uebc7"
+            }
+          },
+          "style": "powerline",
+          "template": "{{ .Name }} ({{ .Version }})",
+          "foreground": "#ffffff",
+          "powerline_symbol": "\ue0b0",
+          "background": "#0077c2",
+          "type": "shell",
+          "min_width": 90
+        },
+        {
+          "style": "powerline",
+          "template": " {{ .CurrentDate | date .Format }} ",
+          "foreground": "#111111",
+          "powerline_symbol": "\ue0b4",
+          "background": "#2e9599",
+          "type": "time",
+          "min_width": 75
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "properties": {
+            "always_enabled": true
+          },
+          "style": "powerline",
+          "template": "❱ ",
+          "foreground": "green",
+          "type": "text"
+        }
+      ],
+      "newline": true
+    }
+  ],
+  "version": 3,
+  "final_space": true
+}
