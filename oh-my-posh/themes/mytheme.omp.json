@@ -38,7 +38,7 @@
           "properties": {
             "folder_icon": "\uf115 ",
             "folder_separator_icon": "\\",
-            "home_icon": "\uf7db ",
+            "home_icon": " ",
             "mapped_locations": {
               "C:/Users/tbrejon/Git/PowerShell/": "\uf09b PowerShell"
             },
