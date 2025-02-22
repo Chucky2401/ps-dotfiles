@@ -1,3 +1,7 @@
 [submodule "nvim"]
 	path = nvim
 	url = git@github.com:Chucky2401/ps-nvim.git
+[submodule "ps-common"]
+	path = ps-common
+	url = https://github.com/Chucky2401/Powershell-Common.git
+	branch = main
