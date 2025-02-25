@@ -2,7 +2,7 @@
   title = "Alacritty"
   dynamic_title = false
 [font]
-  normal = { family = "MesloLGS NF", style = "Regular"}
+  normal = { family = "MesloLGS Nerd Font", style = "Regular"}
   size = 10
 [terminal]
   shell = "pwsh"
