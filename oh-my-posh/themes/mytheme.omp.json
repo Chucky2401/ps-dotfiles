@@ -17,56 +17,65 @@
       "segments": [
         {
           "properties": {
-            "template": "\ue70f"
+            "template": " "
           },
           "style": "powerline",
-          "foreground": "cyan",
+          "powerline_symbol": "",
+          "background": "cyan",
           "type": "os"
         },
         {
           "properties": {
             "style": "full"
           },
-          "style": "plain",
+          "style": "powerline",
+          "powerline_symbol": "",
           "trailing_diamond": ":",
-          "template": " {{ if .SSHSession }}\uf817 {{ end }}TBW@{{ .HostName }} \ue0b1",
-          "foreground": "#16C60C",
-          "background": "transparent",
+          "template": " {{ if .SSHSession }} 󰌘 {{ end }}TBW@{{ .HostName }} ",
+          "background": "#0a5f05",
           "type": "session"
         },
         {
           "properties": {
-            "folder_icon": "\uf115 ",
+            "folder_icon": " ",
             "folder_separator_icon": "\\",
             "home_icon": " ",
             "mapped_locations": {
-              "C:/Users/tbrejon/Git/PowerShell/": "\uf09b PowerShell"
+              "C:/Users/tbrejon/Git/PowerShell/": " PowerShell",
+              "D:/Utilisateurs/TheBlackWizard/Logiciels/Git/PowerShell/": " PowerShell"
             },
             "max_depth": 3,
             "style": "agnoster_short"
           },
           "style": "powerline",
-          "template": " {{ .Path }} $",
-          "foreground": "#3B78FF",
-          "background": "transparent",
+          "powerline_symbol": "",
+          "template": " {{ .Path }} $ ",
+          "background": "#2953b2",
           "type": "path"
         },
         {
           "properties": {
             "fetch_status": true,
-            "fetch_upstream_icon": true
+            "fetch_upstream_icon": true,
+            "mapped_branches": {
+              "feat/*": "🚀 ",
+              "bug/*": "🐛 "
+            },
+            "upstream_icons": {
+              "forgejo.sterimed.local": ""
+            }
           },
           "style": "powerline",
           "template": " {{ .UpstreamIcon }} {{ .HEAD }} {{ .BranchStatus }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} | {{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0}}  {{ .StashCount }}{{ end }}{{ if gt .WorktreeCount 0}}  {{ .WorktreeCount }}{{ end }} ",
           "foreground": "#193549",
           "powerline_symbol": "",
-          "background": "#95ffa4",
+          "background": "#68b272",
           "type": "git",
           "background_templates": [
-            "{{ if or (.Working.Changed) (.Staging.Changed) }}#FFEB3B{{ end }}",
-            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#FFCC80{{ end }}",
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}#ccbc2f{{ end }}",
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#cca366{{ end }}",
             "{{ if gt .Ahead 0 }}#B388FF{{ end }}",
-            "{{ if gt .Behind 0 }}#B388FB{{ end }}"
+            "{{ if gt .Behind 0 }}#7c5eae{{ end }}"
           ]
         }
       ],
@@ -80,12 +89,12 @@
         {
           "properties": {
             "always_enabled": true,
-            "status_template": "{{ if eq .Code 0 }} \uf00c {{ else }} \uf00d {{ .Code }} {{ end }}"
+            "status_template": "{{ if eq .Code 0 }}  {{ else }}  {{ .Code }} {{ end }}"
           },
           "style": "powerline",
           "template": "{{ .String }}",
           "foreground": "#ffffff",
-          "powerline_symbol": "\ue0b0",
+          "powerline_symbol": "",
           "background": "#585858",
           "type": "status",
           "foreground_templates": [
@@ -99,7 +108,7 @@
           "style": "powerline",
           "template": " {{ .FormattedMs }} ",
           "foreground": "#ffffff",
-          "powerline_symbol": "\ue0b0",
+          "powerline_symbol": "",
           "background": "#83769c",
           "type": "executiontime",
           "min_width": 96
@@ -107,14 +116,14 @@
         {
           "properties": {
             "mapped_shell_names": {
-              "powershell": "\ue683",
-              "pwsh": " \uebc7"
+              "powershell": " ",
+              "pwsh": " "
             }
           },
           "style": "powerline",
           "template": "{{ .Name }} ({{ .Version }})",
           "foreground": "#ffffff",
-          "powerline_symbol": "\ue0b0",
+          "powerline_symbol": "",
           "background": "#0077c2",
           "type": "shell",
           "min_width": 90
@@ -123,7 +132,7 @@
           "style": "powerline",
           "template": " {{ .CurrentDate | date .Format }} ",
           "foreground": "#111111",
-          "powerline_symbol": "\ue0b4",
+          "powerline_symbol": "",
           "background": "#2e9599",
           "type": "time",
           "min_width": 75
