@@ -25,3 +25,6 @@ If (-not (Test-Path "$myDocuments\PowerShell\Modules\Tjvs.Utils")) {
   New-Item -Path "$myDocuments\PowerShell\Modules\Tjvs.Utils" -ItemType Junction -Value "$scriptRoot\ps-common\modules\Tjvs.Utils"
 }
 
+If (-not (Test-Path "$env:LOCALAPPDATA\lazygit")) {
+  New-Item -Path "$env:LOCALAPPDATA\lazygit" -ItemType Junction -Value "$scriptRoot\lazygit"
+}
