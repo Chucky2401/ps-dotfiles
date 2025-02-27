@@ -1,4 +1,15 @@
-Import-Module -Name posh-git, Terminal-Icons, PSReadLine, Tjvs.Utils, PSFzF,Microsoft.WinGet.CommandNotFound
+# Import-Module Tjvs.Utils, Tjvs.Packages
+# $modulesRequire = @('posh-git', Terminal-Icons', 'PSReadLine', 'PSFzF', 'Microsoft.WinGet.Client', 'Microsoft.Winget.CommandNotFound')
+#
+# Install-Modules -Names $modulesRequire
+#
+# foreach ($module in $modulesRequire) {
+#   Import-Module -Name $module
+# }
+#
+# $packagesRequire = @('junegunn.fzf', 'Git.Git')
+# 
+Import-Module -Name posh-git, Terminal-Icons, PSReadLine, Tjvs.Utils, PSFzF, Microsoft.WinGet.CommandNotFound
 
 $env:POSH_GIT_ENABLED = $true
 oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\mytheme.omp.json" | Invoke-Expression
