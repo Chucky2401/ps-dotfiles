@@ -31,7 +31,7 @@
           "style": "powerline",
           "powerline_symbol": "",
           "trailing_diamond": ":",
-          "template": " {{ if .SSHSession }} 󰌘 {{ end }}TBW@{{ .HostName }} ",
+          "template": " {{ if .SSHSession }} 󰌘 {{ end }}{{ nospace .UserName }}@{{ .HostName }} ",
           "background": "#0a5f05",
           "type": "session"
         },
