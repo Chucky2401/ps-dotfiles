@@ -40,8 +40,7 @@ function Set-Junction {
   $temporaryName     = "$(Split-Path -Path $Destination -Leaf).bak"
   $temporaryFullName = "$($Destination).bak"
   $targetName        = Split-Path -Path $Source -Leaf
-  $parent            = Split-Path -Path $Source -Parent
-  $gitignoreFile     = Join-Path -Path $parent -ChildPath ".gitignore"
+  $gitignoreFile     = Join-Path -Path $Root -ChildPath ".gitignore"
 
   $pattern          = "^"
   $filterType       = "Exclude"
