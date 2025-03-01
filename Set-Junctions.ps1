@@ -1,3 +1,22 @@
+function Test-ArrayMatchContains {
+  [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
+  Param (
+    [Parameter(Mandatory = $True)]
+    [Object[]]$Array,
+    [Parameter(Mandatory = $True)]
+    [String]$Pattern
+  )
+
+  $isMatched = $False
+
+  foreach ($item in $Array) {
+    If ($item -match $Pattern) {
+      $isMatched = $True
+    }
+  }
+
+  return $isMatched
+}
 $scriptRoot = Split-Path $Script:MyInvocation.MyCommand.Path
 $myDocuments = $([System.Environment]::GetFolderPath("MyDocuments"))
 
