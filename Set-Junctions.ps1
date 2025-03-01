@@ -49,20 +49,20 @@ function Set-Junction {
 
   $pattern          = "^"
   $filterType       = "Exclude"
-  # TODO: if $gitignoreContent is empty
   $gitignoreContent = Get-Content -Path $gitignoreFile | Where-Object { $PSItem -match "^(?:!)?$targetName/" }
-  $isInclude        = Test-ArrayMatchContains -Array $gitignoreContent -Pattern "^!"
 
-  If ($isInclude) {
-    $filterType = "Filter"
-    $pattern    = "^!"
+  If ($null -ne $gitignoreContent) {
+    $isInclude        = Test-ArrayMatchContains -Array $gitignoreContent -Pattern "^!"
+
+    If ($isInclude) {
+      $filterType = "Filter"
+      $pattern    = "^!"
+    }
+
+    $filter     = ($gitIgnoreContent | Where-Object { $PSItem -match $pattern }) -replace "$pattern$targetName/"
+    $parameters.Add($filterType, $filter)
   }
 
-  $filter     = ($gitIgnoreContent | Where-Object { $PSItem -match $pattern }) -replace "$pattern$targetName/"
-  $parameters = @{
-    Path        = $Source
-    $filterType = $filter
-  }
   $contentTarget = Get-ChildItem @parameters
   $contentPath   = Get-ChildItem -Path $Destination
 
