@@ -1,1 +1,9 @@
+# Debugging
+.vscode
+
+# Lazygit
 lazygit/state.yml
+
+# PowerShell
+PowerShell/*
+!PowerShell/Microsoft.PowerShell_profile.ps1
