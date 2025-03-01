@@ -4,6 +4,10 @@
 # Lazygit
 lazygit/state.yml
 
+# Oh-My-Posh
+oh-my-posh/themes/*
+!oh-my-posh/themes/mytheme.omp.json
+
 # PowerShell
 PowerShell/*
 !PowerShell/Microsoft.PowerShell_profile.ps1
