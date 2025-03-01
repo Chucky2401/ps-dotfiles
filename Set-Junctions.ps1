@@ -70,6 +70,32 @@ function Set-Junction {
   Remove-Item -Path $temporaryFullName -Recurse -Force
 }
 
+function Add-Junction {
+  [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low", DefaultParameterSetName = "Object")]
+  Param(
+    [Parameter(Mandatory = $True, ParameterSetName = "Object")]
+    [PSCustomObject]$Object,
+    [Parameter(Mandatory = $True, ParameterSetName = "String")]
+    [String]$Source,
+    [Parameter(Mandatory = $True, ParameterSetName = "String")]
+    [String]$Destination
+  )
+
+  If ($PSCmdlet.ParameterSetName -eq "Object") {
+    $Source      = $Object.Source
+    $Destination = $Object.Destination
+  }
+
+  If (-not (Test-Path $Destination)) {
+    New-Item -Path $Destination -ItemType Junction -Value $Source
+    return
+  }
+
+  If ([String]::IsNullOrEmpty((Get-ItemProperty $Destination).LinkType)) {
+    Set-Junction -Source $Source -Destination $Destination
+  }
+}
+
 $scriptRoot = Split-Path $Script:MyInvocation.MyCommand.Path
 $myDocuments = $([System.Environment]::GetFolderPath("MyDocuments"))
 
