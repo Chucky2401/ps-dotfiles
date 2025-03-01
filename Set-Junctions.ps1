@@ -26,12 +26,15 @@ function Set-Junction {
     [Parameter(Mandatory = $True, ParameterSetName = "String")]
     [String]$Source,
     [Parameter(Mandatory = $True, ParameterSetName = "String")]
-    [String]$Destination
+    [String]$Destination,
+    [Parameter(Mandatory = $True, ParameterSetName = "String")]
+    [String]$Root
   )
 
   If ($PSCmdlet.ParameterSetName -eq "Object") {
     $Source      = $Object.Source
     $Destination = $Object.Destination
+    $Root        = $Object.Root
   }
 
   $temporaryName     = "$(Split-Path -Path $Destination -Leaf).bak"
@@ -78,12 +81,15 @@ function Add-Junction {
     [Parameter(Mandatory = $True, ParameterSetName = "String")]
     [String]$Source,
     [Parameter(Mandatory = $True, ParameterSetName = "String")]
-    [String]$Destination
+    [String]$Destination,
+    [Parameter(Mandatory = $True, ParameterSetName = "String")]
+    [String]$Root
   )
 
   If ($PSCmdlet.ParameterSetName -eq "Object") {
     $Source      = $Object.Source
     $Destination = $Object.Destination
+    $Root        = $Object.Root
   }
 
   If (-not (Test-Path $Destination)) {
@@ -92,7 +98,7 @@ function Add-Junction {
   }
 
   If ([String]::IsNullOrEmpty((Get-ItemProperty $Destination).LinkType)) {
-    Set-Junction -Source $Source -Destination $Destination
+    Set-Junction -Source $Source -Destination $Destination -Root $Root
   }
 }
 
