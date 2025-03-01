@@ -115,9 +115,11 @@ If (-not (Test-Path "$env:LOCALAPPDATA\Programs\oh-my-posh\themes")) {
   New-Item -Path "$env:LOCALAPPDATA\Programs\oh-my-posh\themes" -ItemType Junction -Value "$scriptRoot\oh-my-posh\themes"
 }
 
-If (-not (Test-Path "$myDocuments\PowerShell\Microsoft.PowerShell_profile.ps1")) {
-  New-Item -Path "$myDocuments\PowerShell\Microsoft.PowerShell_profile.ps1" -ItemType HardLink -Value "$scriptRoot\PowerShell\Microsoft.PowerShell_profile.ps1"
-}
+# If (-not (Test-Path "$myDocuments\PowerShell\Microsoft.PowerShell_profile.ps1")) {
+#   New-Item -Path "$myDocuments\PowerShell\Microsoft.PowerShell_profile.ps1" -ItemType HardLink -Value "$scriptRoot\PowerShell\Microsoft.PowerShell_profile.ps1"
+# }
+
+Add-Junction -Destination "$myDocuments\PowerShell" -Source "$scriptRoot\PowerShell"
 
 If (-not (Test-Path "$myDocuments\PowerShell\Modules\Tjvs.Utils")) {
   New-Item -Path "$myDocuments\PowerShell\Modules\Tjvs.Utils" -ItemType Junction -Value "$scriptRoot\ps-common\modules\Tjvs.Utils"
