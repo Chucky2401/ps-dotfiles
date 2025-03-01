@@ -69,7 +69,7 @@ function Set-Junction {
   $toGetBack = (Compare-Object -ReferenceObject $contentTarget -DifferenceObject $contentPath -Property Name).Name
 
   Rename-Item -Path $Destination -NewName $temporaryName
-  New-Item -Path $Destination -ItemType Junction -Value $Source
+  New-Item -Path $Destination -ItemType Junction -Value $Source | Out-Null
 
   Get-ChildItem $temporaryFullName | Where-Object { $toGetBack -contains $PSItem.Name } | `
     Move-Item -Destination $Destination
@@ -97,7 +97,7 @@ function Add-Junction {
   }
 
   If (-not (Test-Path $Destination)) {
-    New-Item -Path $Destination -ItemType Junction -Value $Source
+    New-Item -Path $Destination -ItemType Junction -Value $Source | Out-Null
     return
   }
 
