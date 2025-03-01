@@ -17,6 +17,59 @@ function Test-ArrayMatchContains {
 
   return $isMatched
 }
+
+function Set-Junction {
+  [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low", DefaultParameterSetName = "Object")]
+  Param(
+    [Parameter(Mandatory = $True, ParameterSetName = "Object")]
+    [PSCustomObject]$Object,
+    [Parameter(Mandatory = $True, ParameterSetName = "String")]
+    [String]$Source,
+    [Parameter(Mandatory = $True, ParameterSetName = "String")]
+    [String]$Destination
+  )
+
+  If ($PSCmdlet.ParameterSetName -eq "Object") {
+    $Source      = $Object.Source
+    $Destination = $Object.Destination
+  }
+
+  $temporaryName     = "$(Split-Path -Path $Destination -Leaf).bak"
+  $temporaryFullName = "$($Destination).bak"
+  $targetName        = Split-Path -Path $Source -Leaf
+  $parent            = Split-Path -Path $Source -Parent
+  $gitignoreFile     = Join-Path -Path $parent -ChildPath ".gitignore"
+
+  $pattern          = "^"
+  $filterType       = "Exclude"
+  # TODO: if $gitignoreContent is empty
+  $gitignoreContent = Get-Content -Path $gitignoreFile | Where-Object { $PSItem -match "^(?:!)?$targetName/" }
+  $isInclude        = Test-ArrayMatchContains -Array $gitignoreContent -Pattern "^!"
+
+  If ($isInclude) {
+    $filterType = "Filter"
+    $pattern    = "^!"
+  }
+
+  $filter     = ($gitIgnoreContent | Where-Object { $PSItem -match $pattern }) -replace "$pattern$targetName/"
+  $parameters = @{
+    Path        = $Source
+    $filterType = $filter
+  }
+  $contentTarget = Get-ChildItem @parameters
+  $contentPath   = Get-ChildItem -Path $Destination
+
+  $toGetBack = (Compare-Object -ReferenceObject $contentTarget -DifferenceObject $contentPath -Property Name).Name
+
+  Rename-Item -Path $Destination -NewName $temporaryName
+  New-Item -Path $Destination -ItemType Junction -Value $Source
+
+  Get-ChildItem $temporaryFullName | Where-Object { $toGetBack -contains $PSItem.Name } | `
+    Move-Item -Destination $Destination
+
+  Remove-Item -Path $temporaryFullName -Recurse -Force
+}
+
 $scriptRoot = Split-Path $Script:MyInvocation.MyCommand.Path
 $myDocuments = $([System.Environment]::GetFolderPath("MyDocuments"))
 
