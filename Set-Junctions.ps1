@@ -31,6 +31,11 @@ function Set-Junction {
     [String]$Root
   )
 
+  $isInclude = $False
+  $parameters = @{
+    Path        = $Source
+  }
+
   If ($PSCmdlet.ParameterSetName -eq "Object") {
     $Source      = $Object.Source
     $Destination = $Object.Destination
