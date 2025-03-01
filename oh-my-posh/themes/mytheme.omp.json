@@ -17,7 +17,7 @@
       "segments": [
         {
           "properties": {
-            "template": " "
+            "windows": " "
           },
           "style": "powerline",
           "powerline_symbol": "",
