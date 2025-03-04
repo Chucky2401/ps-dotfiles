@@ -109,26 +109,67 @@ function Add-Junction {
 $scriptRoot = Split-Path $Script:MyInvocation.MyCommand.Path
 $myDocuments = $([System.Environment]::GetFolderPath("MyDocuments"))
 
-If (-not (Test-Path "$env:APPDATA\alacritty")) {
-  New-Item -Path "$($env:APPDATA)\alacritty" -ItemType Junction -Value "$scriptRoot\alacritty"
+$junctions = @(
+  [PSCustomObject]@{
+    Path  = "$($env:APPDATA)\alacritty"
+    Value = "$scriptRoot\alacritty"
+  },
+  [PSCustomObject]@{
+    Path  = "$($env:LOCALAPPDATA)\nvim"
+    Value = "$scriptRoot\nvim"
+  },
+  [PSCustomObject]@{
+    Path  = "$($env:APPDATA)\yazi"
+    Value = "$scriptRoot\yazi"
+  },
+  [PSCustomObject]@{
+    Path  = "$env:LOCALAPPDATA\Programs\oh-my-posh\themes"
+    Value = "$scriptRoot\oh-my-posh\themes"
+  },
+  [PSCustomObject]@{
+    Path  = "$myDocuments\PowerShell"
+    Value = "$scriptRoot\PowerShell"
+  },
+  [PSCustomObject]@{
+    Path  = "$myDocuments\PowerShell\Modules\Tjvs.Utils"
+    Value = "$scriptRoot\ps-common\modules\Tjvs.Utils"
+  },
+  [PSCustomObject]@{
+    Path  = "$env:LOCALAPPDATA\lazygit"
+    Value = "$scriptRoot\lazygit"
+  }
+)
+
+foreach ($junction in $junctions) {
+  If (-not (Test-Path $junction.Path)) {
+    Add-Junction -Destination $junction.Path -Source $junction.Value -Root $scriptRoot
+  }
 }
 
-If (-not (Test-Path "$env:LOCALAPPDATA\nvim")) {
-  New-Item -Path "$($env:LOCALAPPDATA)\nvim" -ItemType Junction -Value "$scriptRoot\nvim"
-}
+# If (-not (Test-Path "$env:APPDATA\alacritty")) {
+#   New-Item -Path "$($env:APPDATA)\alacritty" -ItemType Junction -Value "$scriptRoot\alacritty"
+# }
+# 
+# If (-not (Test-Path "$env:LOCALAPPDATA\nvim")) {
+#   New-Item -Path "$($env:LOCALAPPDATA)\nvim" -ItemType Junction -Value "$scriptRoot\nvim"
+# }
+# 
+# If (-not (Test-Path "$env:APPDATA\yazi")) {
+#   New-Item -Path "$($env:APPDATA)\yazi" -ItemType Junction -Value "$scriptRoot\yazi"
+# }
+# 
+# Add-Junction -Destination "$env:LOCALAPPDATA\Programs\oh-my-posh\themes" -Source "$scriptRoot\oh-my-posh\themes" -Root $scriptRoot
+# 
+# Add-Junction -Destination "$myDocuments\PowerShell" -Source "$scriptRoot\PowerShell" -Root $scriptRoot
+# 
+# If (-not (Test-Path "$myDocuments\PowerShell\Modules\Tjvs.Utils")) {
+#   New-Item -Path "$myDocuments\PowerShell\Modules\Tjvs.Utils" -ItemType Junction -Value "$scriptRoot\ps-common\modules\Tjvs.Utils"
+# }
+# 
+# If (-not (Test-Path "$env:LOCALAPPDATA\lazygit")) {
+#   New-Item -Path "$env:LOCALAPPDATA\lazygit" -ItemType Junction -Value "$scriptRoot\lazygit"
+# }
 
-If (-not (Test-Path "$env:APPDATA\yazi")) {
-  New-Item -Path "$($env:APPDATA)\yazi" -ItemType Junction -Value "$scriptRoot\yazi"
-}
-
-Add-Junction -Destination "$env:LOCALAPPDATA\Programs\oh-my-posh\themes" -Source "$scriptRoot\oh-my-posh\themes" -Root $scriptRoot
-
-Add-Junction -Destination "$myDocuments\PowerShell" -Source "$scriptRoot\PowerShell" -Root $scriptRoot
-
-If (-not (Test-Path "$myDocuments\PowerShell\Modules\Tjvs.Utils")) {
-  New-Item -Path "$myDocuments\PowerShell\Modules\Tjvs.Utils" -ItemType Junction -Value "$scriptRoot\ps-common\modules\Tjvs.Utils"
-}
-
-If (-not (Test-Path "$env:LOCALAPPDATA\lazygit")) {
-  New-Item -Path "$env:LOCALAPPDATA\lazygit" -ItemType Junction -Value "$scriptRoot\lazygit"
-}
+# If (-not (Test-Path "$myDocuments\PowerShell\Modules\Tjvs.Packages")) {
+#   New-Item -Path "$myDocuments\PowerShell\Modules\Tjvs.Packages" -ItemType Junction -Value "$scriptRoot\ps-common\modules\Tjvs.Packages"
+# }
