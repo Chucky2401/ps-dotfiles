@@ -141,9 +141,7 @@ $junctions = @(
 )
 
 foreach ($junction in $junctions) {
-  If (-not (Test-Path $junction.Path)) {
-    Add-Junction -Destination $junction.Path -Source $junction.Value -Root $scriptRoot
-  }
+  Add-Junction -Destination $junction.Path -Source $junction.Value -Root $scriptRoot
 }
 
 # If (-not (Test-Path "$env:APPDATA\alacritty")) {
