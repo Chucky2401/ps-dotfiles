@@ -11,3 +11,7 @@ oh-my-posh/themes/*
 # PowerShell
 PowerShell/*
 !PowerShell/Microsoft.PowerShell_profile.ps1
+
+# GnuPG
+.gnupg/*
+!.gnupg/gpg-agent.conf
